@@ -19,3 +19,12 @@ sudo apt install python3-pcl
 ```
 - open 3d 
 - Numpy 
+## Visualization
+You can view it by
+```shell
+pcl_viewer -multiview 2 [GROUND POINT CLOUD FILE] [NOT GROUND POINT CLOUD FILE]
+```
+For example:
+```shell
+pcl_viewer -multiview 2 out/0000000002_ground.pcd out/0000000002_notground.pcd
+```
