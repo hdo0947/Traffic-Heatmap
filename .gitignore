@@ -1,4 +1,6 @@
-data/*.bin
+sync/data/*.bin
+oxts/data/*.txt
+mat/true_pose.mat
 data/*.pcd
 out/*.pcd
 __pycache__/

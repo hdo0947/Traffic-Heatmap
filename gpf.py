@@ -26,7 +26,6 @@ class GroudPlaneFit:
         U, S, V = np.linalg.svd(cov_matrix, full_matrices=True)
         normal_n = U[:, 2]
         d = -points_mean[:3] @ normal_n
-
         # print("Covariance: \n", cov_matrix)
         # print("center:\n", points_mean)
         # print("d:\n", d)
@@ -49,7 +48,10 @@ class GroudPlaneFit:
         cloud_sorted = cloud_sorted[index:]
         Np = len(cloud_sorted)
         LPR_height = 0
+        print(len(cloud_sorted))
         for i in range(self.num_lpr):
+
+            # print("!:",cloud_sorted[i][2])
             LPR_height += cloud_sorted[i][2]
 
         LPR_height = LPR_height / self.num_lpr
@@ -61,8 +63,7 @@ class GroudPlaneFit:
         pcl_seed_pcd = pcl.PointCloud(seed_point_list)
         return pcl_seed_pcd
 
-    def mainLOop(self, pcl_cloud_in: pcl.PointCloud, o3d_cloud_in: o3d.geometry.PointCloud) -> (
-                                                        o3d.geometry.PointCloud, o3d.geometry.PointCloud):
+    def mainLoop(self, pcl_cloud_in: pcl.PointCloud, returnType="o3d"):
 
         pcl_seed_pcd = self.extractInitialSeeds(pcl_cloud_in)
         for i in range(self.num_iter):
@@ -77,15 +78,18 @@ class GroudPlaneFit:
             th_dist_d = self.th_dist - d
             ground_points = []
             notground_points = []
-            for k, in_point in enumerate(pcl_cloud_in):
+            # print(np.shape(result))
+            (R)= np.shape(result)[0]
+            for k in range(R):
+                in_point = pcl_cloud_in[k]
                 if result[k] < th_dist_d:
                     ground_points.append([in_point[0], in_point[1], in_point[2]])
                 else:
                     notground_points.append([in_point[0], in_point[1], in_point[2]])
-            # o3d_ground_p = o3d.geometry.PointCloud()
-            # o3d_ground_p.points = o3d.utility.Vector3dVector(ground_points)
             o3d_ground_p = npy2o3d_pcd_converter(ground_points)
-            # o3d_notground_p = o3d.geometry.PointCloud()
-            # o3d_notground_p.points = o3d.utility.Vector3dVector(notground_points)
             o3d_notground_p = npy2o3d_pcd_converter(notground_points)
-        return o3d_ground_p, o3d_notground_p
+        if returnType == "o3d":
+            return o3d_ground_p, o3d_notground_p
+        else:
+            return ground_points, notground_points
+

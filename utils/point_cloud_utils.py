@@ -32,4 +32,4 @@ def bin2pcdfile(bin_filename, pcd_filename):
 
 
 if __name__ == '__main__':
-    bin2pcdfile("../data/0000000002.bin", "../0000000002.pcd")
+    bin2pcdfile("../sync/data/0000000002.bin", "../0000000002.pcd")
