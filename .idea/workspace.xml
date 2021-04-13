@@ -2,43 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f66ca9ef-40ee-4381-9424-9a1b127e23dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data_set/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python_/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/python_/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpf.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_/gpf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/convertOxtsToPose.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/drawBox2D.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/drawBox3D.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/echoTracklet.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/extractPoses.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/latToScale.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/latlonToMercator.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/loadCalibration.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/loadCalibrationCamToCam.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/loadCalibrationRigid.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/loadCarPose.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/loadOxtsliteData.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/loadTimestamps.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/make.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/project.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/projectToImage.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/readTracklets.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/readTrackletsMex.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/readTrackletsMex.mexa64" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/run_demoTracklets.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/run_demoVehiclePath.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/run_demoVelodyne.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/test_labels.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/visualization.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matlabToolkits/wrapToPi.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdf_scan.py" beforeDir="false" afterPath="$PROJECT_DIR$/matlab/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/pcd_animation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/file_reading_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_/utils/file_reading_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/pcl_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_/utils/pcl_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/point_cloud_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_/utils/point_cloud_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.sh" beforeDir="false" afterPath="$PROJECT_DIR$/test.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,33 +60,12 @@
       <recent name="$PROJECT_DIR$/data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/python_" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/sync" />
     </key>
   </component>
-  <component name="RunManager" selected="Shell Script.run.sh">
-    <configuration name="file_reading_util" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="project568_py3.5" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/file_reading_util.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Shell Script.test.sh">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="project568_py3.5" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -164,6 +110,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="progressbar.sh" type="ShConfigurationType" temporary="true">
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/progressbar.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="run.sh" type="ShConfigurationType" temporary="true">
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
       <option name="SCRIPT_PATH" value="$PROJECT_DIR$/run.sh" />
@@ -192,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Shell Script.run.sh" />
         <item itemvalue="Shell Script.test.sh" />
+        <item itemvalue="Shell Script.run.sh" />
+        <item itemvalue="Shell Script.progressbar.sh" />
         <item itemvalue="Python.pcd_animation" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.file_reading_util" />
       </list>
     </recent_temporary>
   </component>
@@ -218,7 +177,10 @@
       <workItem from="1618273404984" duration="298000" />
       <workItem from="1618291742095" duration="1921000" />
       <workItem from="1618294628638" duration="165000" />
-      <workItem from="1618294820212" duration="4112000" />
+      <workItem from="1618294820212" duration="5324000" />
+      <workItem from="1618314274067" duration="3871000" />
+      <workItem from="1618321696853" duration="1471000" />
+      <workItem from="1618324583594" duration="2359000" />
     </task>
     <servers />
   </component>

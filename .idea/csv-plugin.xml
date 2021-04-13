@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/progressbar.sh">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/run.sh">
           <value>
             <Attribute>
