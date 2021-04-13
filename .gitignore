@@ -1,7 +1,6 @@
-sync/data/*.bin
-oxts/data/*.txt
-mat/true_pose.mat
-data/*.pcd
-out/*.pcd
-__pycache__/
-.idea/
+matlab/*.mat
+matlab/pcd_data/0014/*.pcd
+data_set/0014/oxts/*.txt
+data_set/0014/velodyne/*.bin
+*.pcd
+*.mat
