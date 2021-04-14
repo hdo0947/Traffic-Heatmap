@@ -38,5 +38,12 @@ do
 done
 
 cd matlab
-matlab  -r "run demo_car.m"
+matlab  -r "run demo_car.m;exit;"
+matlab  -r "run demo_car.m;exit;"
+cd ..
+cd representation
+/usr/bin/python3 map.py
+cd ..
+xdg-open map.html
+
 
