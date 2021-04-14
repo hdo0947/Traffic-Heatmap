@@ -1,4 +1,4 @@
-function [trueCluster_oppodir, trueCluster_samedir, centroid_oppodir, centroid_samedir] = plot_cars_no_ground_aug(groundfilename, notgroundfilename,pose)
+function [trueCluster_oppodir, trueCluster_samedir, centroid_oppodir, centroid_samedir] = cars_no_ground_aug(groundfilename, notgroundfilename,pose)
     ptCloud_ground = pcread(groundfilename);
     ptCloud_notground = pcread(notgroundfilename);
 
@@ -104,7 +104,7 @@ function [trueCluster_oppodir, trueCluster_samedir, centroid_oppodir, centroid_s
     centroid_oppodir = [];
     centroid_samedir = [];
     
-    figure(100)
+%     figure(100)
     % plot cars on the opposite direction and calculate the centroid:
     for current_label = 1:length(trueCluster_oppodir)      
         current_obj= trueCluster_oppodir{current_label};
@@ -119,17 +119,17 @@ function [trueCluster_oppodir, trueCluster_samedir, centroid_oppodir, centroid_s
         current_obj_y = current_obj_world(2,:);
         current_obj_z = current_obj_world(3,:);   
         
-        hold on
-        plot3(current_obj_x, current_obj_y, current_obj_z,'.')
-        hold on
+%         hold on
+%         plot3(current_obj_x, current_obj_y, current_obj_z,'.')
+%         hold on
         % Box fitting on the clusters:
         [box, ~] = minRectangle(double(current_obj_world(1:3,:).'));
-        minboxplot(box)   
+%         minboxplot(box)   
         centroid_oppodir(idx,1:3) = mean(box);
-        scatter3(centroid_oppodir(idx,1), centroid_oppodir(idx,2), centroid_oppodir(idx,3), 15)
+%         scatter3(centroid_oppodir(idx,1), centroid_oppodir(idx,2), centroid_oppodir(idx,3), 15)
         idx = idx + 1;
-        axis equal
-        grid on
+%         axis equal
+%         grid on
     end
     
     % plot cars on the same direction and calculate the centroid:
@@ -147,16 +147,16 @@ function [trueCluster_oppodir, trueCluster_samedir, centroid_oppodir, centroid_s
         current_obj_y = current_obj_world(2,:);
         current_obj_z = current_obj_world(3,:);   
         
-        hold on
-        plot3(current_obj_x, current_obj_y, current_obj_z,'.')
-        hold on
+%         hold on
+%         plot3(current_obj_x, current_obj_y, current_obj_z,'.')
+%         hold on
         % Box fitting on the clusters:
         [box, ~] = minRectangle(double(current_obj_world(1:3,:).'));
-        minboxplot(box)   
+%         minboxplot(box)   
         centroid_samedir(idx,1:3) = mean(box);
-        scatter3(centroid_samedir(idx,1), centroid_samedir(idx,2), centroid_samedir(idx,3), 15)
+%         scatter3(centroid_samedir(idx,1), centroid_samedir(idx,2), centroid_samedir(idx,3), 15)
         idx = idx + 1;
-        axis equal
-        grid on
+%         axis equal
+%         grid on
     end
 end

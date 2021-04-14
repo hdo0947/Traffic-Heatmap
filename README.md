@@ -3,7 +3,7 @@
 # Introduction
 This is the coding part of the traffic heatmap. This project is to create a traffic heatmap based on the radar dataset.
 
-![traffic heatmap](/home/kardel/project568_py3.5/traffic heatmap.png)
+![traffic heatmap](traffic heatmap.png)
 
 # Membership
 Yufeng Chen
@@ -13,7 +13,7 @@ Hyoensu Do
 Ruochen Hou
 
 # Basic workflow
-![workflow](/home/kardel/project568_py3.5/workflow.png)
+![workflow](workflow.png)
 
 
 # Instruction

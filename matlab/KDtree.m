@@ -1,3 +1,0 @@
-
-% KDTree Implementation
-

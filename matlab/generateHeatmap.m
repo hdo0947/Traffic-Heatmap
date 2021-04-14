@@ -1,5 +1,6 @@
 load("l2_intensity.mat");
 load("l1_intensity.mat");
+
 load("oxts.mat")
 N = size(oxts_, 1);
 intensity_points = zeros(N, 4);

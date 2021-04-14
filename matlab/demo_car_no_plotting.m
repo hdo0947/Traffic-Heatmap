@@ -23,9 +23,9 @@ for i = 1:N
     
     % Plot_cars_no_ground_aug will return clusters and also centroid of
     % clusters from both lanes
-    [Cluster_oppodir, Cluster_samedir, centroid_oppodir, centroid_samedir] = plot_cars_no_ground_aug(groundfilename, notgroundfilename,pose{i});
+    [Cluster_oppodir, Cluster_samedir, centroid_oppodir, centroid_samedir] = cars_no_ground_aug(groundfilename, notgroundfilename,pose{i});
     
-    hold on
+%     hold on
     path_x = pose{i}(1,4);
     path_y = pose{i}(2,4);
     path_z = pose{i}(3,4);
@@ -34,9 +34,9 @@ for i = 1:N
     opposite_lane_point = pose{i} * opposite_lane_point_temp;
     opposite_lane_points{i} = opposite_lane_point(1:3);
     
-    hold on
-    scatter3(path_x,path_y,path_z,20,'red')
-    scatter3(opposite_lane_point(1), opposite_lane_point(2), opposite_lane_point(3), 20, 'green')
+%     hold on
+%     scatter3(path_x,path_y,path_z,20,'red')
+%     scatter3(opposite_lane_point(1), opposite_lane_point(2), opposite_lane_point(3), 20, 'green')
     
     PtCluster_oppodir{i} = Cluster_oppodir;
     Ptcentroid_oppodir{i} = centroid_oppodir;
@@ -45,11 +45,11 @@ for i = 1:N
     lidar_vehicle{i} = pose{i};
     
 end
-xlabel('x [m]')
-ylabel('y [m]')
-zlabel('z [m]')
-axis equal
-title('Potential moving objects in all the frames')
+% xlabel('x [m]')
+% ylabel('y [m]')
+% zlabel('z [m]')
+% axis equal
+% title('Potential moving objects in all the frames')
 
 %% Make data storage
 lane_one = zeros(N,1);
@@ -61,10 +61,10 @@ tracker = trackerJPDA('TrackLogic','Integrated' ,'AssignmentThreshold',35,...
     'ConfirmationThreshold', 0.85, ...
     'DeletionThreshold', 0.8);
 
-tp = theaterPlot('XLimits',[-50 200],'YLimits',[-400 30]);
-% Plot to visualize tracks and detections
-trackP = trackPlotter(tp,'DisplayName','Tracks','MarkerFaceColor','g','HistoryDepth',0);
-detectionP = detectionPlotter(tp,'DisplayName','Detections','MarkerFaceColor','r');
+% tp = theaterPlot('XLimits',[-50 200],'YLimits',[-400 30]);
+% % Plot to visualize tracks and detections
+% trackP = trackPlotter(tp,'DisplayName','Tracks','MarkerFaceColor','g','HistoryDepth',0);
+% detectionP = detectionPlotter(tp,'DisplayName','Detections','MarkerFaceColor','r');
 % To obtain the position and velocity, create position and velocity
 % selectors
 positionSelector = [1 0 0 0 0 0; 0 0 1 0 0 0; 0 0 0 0 0 0]; % [x, y, 0]
@@ -97,7 +97,7 @@ for time = 1:dt:314
     
     
     % Step the tracker through time with the detections.
-    scatter(veh_pos(1),veh_pos(2),'r.');
+%     scatter(veh_pos(1),veh_pos(2),'r.');
     if size(Ptcentroid_oppodir{time},1) ~= 0
         [confirmed,tentative,alltracks,info] = tracker(detection,time);
     
@@ -125,7 +125,7 @@ for time = 1:dt:314
     %     % Update the plot if there are any tracks.
         if numel(confirmed)>0
             labels = arrayfun(@(x)num2str([x.TrackID]),confirmed,'UniformOutput',false);
-            trackP.plotTrack(pos,vel,labels);
+%             trackP.plotTrack(pos,vel,labels);
         end
         pause(0.1);
     end
@@ -137,18 +137,18 @@ end
 tracker = trackerJPDA('TrackLogic','Integrated' ,'AssignmentThreshold',30,...
     'ConfirmationThreshold', 0.85, ...
     'DeletionThreshold', 0.8);
-
-tp = theaterPlot('XLimits',[-50 200],'YLimits',[-400 30]);
-% Plot to visualize tracks and detections
-trackP = trackPlotter(tp,'DisplayName','Tracks','MarkerFaceColor','g','HistoryDepth',0);
-detectionP = detectionPlotter(tp,'DisplayName','Detections','MarkerFaceColor','r');
+% 
+% tp = theaterPlot('XLimits',[-50 200],'YLimits',[-400 30]);
+% % Plot to visualize tracks and detections
+% trackP = trackPlotter(tp,'DisplayName','Tracks','MarkerFaceColor','g','HistoryDepth',0);
+% detectionP = detectionPlotter(tp,'DisplayName','Detections','MarkerFaceColor','r');
 % To obtain the position and velocity, create position and velocity
 % selectors
-positionSelector = [1 0 0 0 0 0; 0 0 1 0 0 0; 0 0 0 0 0 0]; % [x, y, 0]
+% positionSelector = [1 0 0 0 0 0; 0 0 1 0 0 0; 0 0 0 0 0 0]; % [x, y, 0]
 velocitySelector = [0 1 0 0 0 0; 0 0 0 1 0 0; 0 0 0 0 0 0 ]; % [vx, vy, 0]
 
 dt = 1;
-hold on;
+% hold on;
 for time = 1:dt:314
    
     % Create detections of the two objects with noise.
@@ -174,7 +174,7 @@ for time = 1:dt:314
     veh_vel = veh_pos - veh_prev;
     
     % Step the tracker through time with the detections.
-    scatter(veh_pos(1),veh_pos(2),'r.');
+%     scatter(veh_pos(1),veh_pos(2),'r.');
     if size(Ptcentroid_samedir{time},1) ~= 0
         [confirmed,tentative,alltracks,info] = tracker(detection,time);
     
@@ -202,7 +202,7 @@ for time = 1:dt:314
     %     % Update the plot if there are any tracks.
         if numel(confirmed)>0
             labels = arrayfun(@(x)num2str([x.TrackID]),confirmed,'UniformOutput',false);
-            trackP.plotTrack(pos,vel,labels);
+%             trackP.plotTrack(pos,vel,labels);
         end
         pause(0.1);
     end

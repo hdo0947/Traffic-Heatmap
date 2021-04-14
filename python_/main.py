@@ -22,7 +22,6 @@ def ground_segmentation(input_filename: str, out_ground_filename, out_not_ground
     else:
         uniname = input_filename
     pcl_pcd = pcl.load(uniname)
-    o3d_pcd = o3d.io.read_point_cloud(uniname)
     g = gpf.GroudPlaneFit()
 
     ground, notground = g.mainLoop(pcl_pcd)
@@ -92,18 +91,13 @@ def ground_segmentation_grid(input_filename: str, out_ground_filename, out_not_g
                 pcl_pcd = pcl.load(fname)
                 g = gpf.GroudPlaneFit()
                 ground, notground = g.mainLoop(pcl_pcd, "numpy")
-                # print(fname)
                 if len(ground) != 0:
                     ground_l.append(ground)
                 if len(notground) != 0:
                     notground_l.append(notground)
 
     ground_np = np.concatenate(ground_l)
-    # try:
     notground_np = np.concatenate(notground_l)
-    # except ValueError as ve:
-    #     for ng in notground_l:
-    #         print(len(ng))
     ground_o3d = npy2o3d_pcd_converter(ground_np)
     notground_o3d = npy2o3d_pcd_converter(notground_np)
     o3d.io.write_point_cloud(out_ground_filename, ground_o3d)
@@ -117,21 +111,6 @@ def ground_segmentation_grid(input_filename: str, out_ground_filename, out_not_g
 
 
 def main():
-    # for f in tqdm(os.listdir(os.path.join(os.getcwd(), "sync/data"))):
-    #     ground_fname = f.replace(".bin", "ground.pcd")
-    #     notground_fname = f.replace(".bin", "notground.pcd")
-    #     ground_segmentation_grid("sync/data/" + f, "out/" + ground_fname, "out/" + notground_fname)
-
-    # ground_segmentation("data/" + f, "out/"+ground_fname, "out/"+notground_fname)
-    # ground_segmentation("sync/data/0000000004.bin", "out/0000000004ground.pcd", "out/0000000004notground.pcd")
-    #     utils.point_cloud_utils.bin2pcdfile("data/"+f, "out/" + f.replace(".bin", ".pcd"))
-    # for i in range(10):
-    #     ground_segmentation("data/000000000"+str(i)+".bin", "out/000000000"+str(i)+"_ground.pcd", "out/000000000"+str(i)+"_notground.pcd")
-    # for i in range(10, 100):
-    #     ground_segmentation("data/00000000"+str(i)+".bin", "out/00000000"+str(i)+"_ground.pcd", "out/00000000"+str(i)+"_notground.pcd")
-    # for i in range(10, 314):
-    #     ground_segmentation("data/0000000"+str(i)+".bin", "out/0000000"+str(i)+"_ground.pcd", "out/0000000"+str(i)+"_notground.pcd")
-    #
     parser = argparse.ArgumentParser(description="group segmentation")
     parser.add_argument("--input_filename", type=str, help="input pcd filename, acceptable extensions: .pcd, .bin",
                         dest="infile")

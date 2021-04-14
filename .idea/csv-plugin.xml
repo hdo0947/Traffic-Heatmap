@@ -38,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/representation/map.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/run.sh">
           <value>
             <Attribute>
