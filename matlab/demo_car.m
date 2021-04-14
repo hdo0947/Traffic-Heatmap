@@ -223,30 +223,43 @@ for i = 1:N
     x_l2(i) = lidar_vehicle{i}(1,4);
     y_l2(i) = lidar_vehicle{i}(2,4);
 end
-
+l2_intensity = zeros(N, 1);
+l1_intensity = zeros(N, 1);
 for i = val+1:val:N
     % one moving in frame is yellow, zero is green more than 1 is red
     figure(200)
     l1_avg = sum(lane_one(i-val:i))/val;
     l2_avg = sum(lane_two(i-val:i))/val;
-
+%     disp([x_l1(i-val:i) , y_l1(i-val:i)]);
+    disp([x_l2(i-val:i) , y_l2(i-val:i)]);
     if l1_avg < 1
         scatter(x_l1(i-val:i) , y_l1(i-val:i),15,'g','filled')
+        l1_intensity(i-val:i, 1) = 0;
     elseif l1_avg > 1
         scatter(x_l1(i-val:i) , y_l1(i-val:i),15,'r','filled')
+        l1_intensity(i-val:i, 1) = 2;
     else
         scatter(x_l1(i-val:i) , y_l1(i-val:i),15,'y','filled')
+        l1_intensity(i-val:i, 1) = 1;
     end
     if l2_avg < 1
         scatter(x_l2(i-val:i) , y_l2(i-val:i),15,'g','filled')
+        l2_intensity(i-val:i, 1) = 0;
     elseif l2_avg > 1
         scatter(x_l2(i-val:i) , y_l2(i-val:i),15,'r','filled')
+        l2_intensity(i-val:i, 1) = 2;
     else
         scatter(x_l2(i-val:i) , y_l2(i-val:i),15,'y','filled')
+        l2_intensity(i-val:i, 1) = 1;
     end
+    
     hold on
     axis equal
 end
+disp(l2_intensity);
+disp(l1_intensity);
+save("l1_intensity.mat", 'l1_intensity');
+save("l2_intensity.mat", 'l2_intensity');
 xlabel('x [m]')
 ylabel('y [m]')
 grid on

@@ -1,18 +1,11 @@
-function generateHeatmap(kitti_id, type, API_KEY)
-%% Edit API URL
-switch type
-    case "hybrid"
-        oxts_files = dir(sprintf('../data_set/%s/oxts/data/*.txt',kitti_id));
-        
-
-url_ = "https://maps.googleapis.com/maps/api/staticmap?center=49.01668764586999,8.438408125363&zoom=17&size=800x400&markers=color:green%7Clabel:D%7C49.015538872539,8.4363695878495%20&markers=color:red%7Clabel:C%7C49.017836419201,8.4404466628765%20&maptype=hybrid&key=AIzaSyDJSghdJBc-Peznow3d9aQyz4pycisnkjI"; 
-    case "satellite"
-        pass
-    case "roadmap"
-        passa
+load("l2_intensity.mat");
+load("l1_intensity.mat");
+load("oxts.mat")
+N = size(oxts_, 1);
+intensity_points = zeros(N, 4);
+for i=1:N
+    intensity_points(i, 1:2) = oxts_{i}(1:2);
+    intensity_points(i, 3) = l2_intensity(i, 1);
+    intensity_points(i, 4) = l1_intensity(i, 1);
 end
-%% read image from
-url = "https://maps.googleapis.com/maps/api/staticmap?center=49.01668764586999,8.438408125363&zoom=17&size=800x400&markers=color:green%7Clabel:D%7C49.015538872539,8.4363695878495%20&markers=color:red%7Clabel:C%7C49.017836419201,8.4404466628765%20&maptype=hybrid&key=AIzaSyDJSghdJBc-Peznow3d9aQyz4pycisnkjI";
-urlwrite(url, 'satellite image.png');
-imread(filename)
-%%
+save("../representation/intensity_points.mat", 'intensity_points')
