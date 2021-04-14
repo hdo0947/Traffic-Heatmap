@@ -32,6 +32,8 @@ all_velodyne_files=$(ls ${velodyne_dir});
 gnng_mat_dir="matlab/pcd_data/$oxt_dir"
 len=$(ls ${velodyne_dir}| wc -l)
 len2=$(ls ${gnng_mat_dir}| wc -l)
+echo $len2;
+echo $len;
 if [ ! $len2 = $(($len * 2)) ]
 then
   echo "Doing ground segmentation...."
@@ -41,9 +43,10 @@ then
   for entry in $(ls ${velodyne_dir})
   do
     gfilename="${entry%.bin}"ground.pcd;
-    ngfilename="${entry%.bin}"notground.pcd;file:///home/kardel/project568_py3.5/map.html
+    ngfilename="${entry%.bin}"notground.pcd;
+    ((count=count+1))
     progressbar "Ground Segmentation" $count $len
-
+    /usr/bin/python3  python_/main.py --input_file $velodyne_dir/$entry --output_ground_filename matlab/pcd_data/$oxt_dir/$gfilename --output_notground_filename matlab/pcd_data/$oxt_dir/$ngfilename
   done
 else
   echo "Have already done ground segmentation!"
