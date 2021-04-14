@@ -59,7 +59,7 @@ function [trueCluster_oppodir, trueCluster_samedir, centroid_oppodir, centroid_s
         obj_height = max(current_obj_z) - min(current_obj_z);
 
         % exclude the following clusters:
-        size_limit = size(current_obj,1) < 80 || size(current_obj,1) > 600;
+        size_limit = size(current_obj,1) < 80 || size(current_obj,1) > 650;
         length_limit = obj_length > 6;
         width_limit = obj_width > 5;
         pole_limit = (obj_width < 1.5 || obj_length < 1.5) && obj_height > 1.8;
