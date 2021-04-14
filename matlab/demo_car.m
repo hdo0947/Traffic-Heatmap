@@ -15,7 +15,7 @@ PtCluster_samedir = cell(N,1);
 Ptcentroid_oppodir = cell(N,1);
 Ptcentroid_samedir = cell(N,1);
 lidar_vehicle = cell(N,1);
-
+opposite_lane_points = cell(N,1);
 
 for i = 1:N
     groundfilename = sprintf('pcd_data/%s/%010dground.pcd', FolderName, i-1);
@@ -29,9 +29,15 @@ for i = 1:N
     path_x = pose{i}(1,4);
     path_y = pose{i}(2,4);
     path_z = pose{i}(3,4);
+    
+    opposite_lane_point_temp = [0,8,0,1].';
+    opposite_lane_point = pose{i} * opposite_lane_point_temp;
+    opposite_lane_points{i} = opposite_lane_point(1:3);
+    
     hold on
     scatter3(path_x,path_y,path_z,20,'red')
-
+    scatter3(opposite_lane_point(1), opposite_lane_point(2), opposite_lane_point(3), 20, 'green')
+    
     PtCluster_oppodir{i} = Cluster_oppodir;
     Ptcentroid_oppodir{i} = centroid_oppodir;
     PtCluster_samedir{i} = Cluster_samedir;
@@ -42,7 +48,12 @@ end
 xlabel('x [m]')
 ylabel('y [m]')
 zlabel('z [m]')
+axis equal
 title('Potential moving objects in all the frames')
+
+%% Make data storage
+lane_one = zeros(N,1);
+lane_two = zeros(N,1);
 
 %% opposite direction:
 @initcvekf;
@@ -86,7 +97,7 @@ for time = 1:dt:314
     
     
     % Step the tracker through time with the detections.
-    scatter(veh_pos(1),veh_pos(2),'.');
+    scatter(veh_pos(1),veh_pos(2),'r.');
     if size(Ptcentroid_oppodir{time},1) ~= 0
         [confirmed,tentative,alltracks,info] = tracker(detection,time);
     
@@ -98,7 +109,7 @@ for time = 1:dt:314
         counter = 0;
         for j = 1:size(vel,1)
             vel_dir = vel(j,1:2) * veh_vel;
-            if norm(vel(j,1:2)) < 0.3 || norm(vel(j,1:2)) > 10 || vel_dir > 0
+            if norm(vel(j,1:2)) < 0.003 || norm(vel(j,1:2)) > 10 || vel_dir > 0
                 if j-counter ~= 0
                     confirmed2(j-counter,:) = [];
                     counter = counter + 1;
@@ -108,6 +119,7 @@ for time = 1:dt:314
             end
         end
         confiemed = confirmed2;
+        lane_one(time) = size(confirmed,1);
         meas = cat(2,detection.Measurement);
         measCov = cat(3,detection.MeasurementNoise);
     %     % Update the plot if there are any tracks.
@@ -117,24 +129,6 @@ for time = 1:dt:314
         end
         pause(0.1);
     end
-        %     pause(0.5);
-    %detectionP.plotDetection(meas',measCov);
-%     drawnow;
-%     % Display the cost and marginal probability of distribution every eight
-%     % seconds.
-%     if time>0 && mod(time,8) == 0
-%         disp(['At time t = ' num2str(time) ' seconds,']);
-%         disp('The cost of assignment was: ')
-%         disp(info.CostMatrix);
-%         disp(['Number of clusters: ' num2str(numel(info.Clusters))]);
-%         if numel(info.Clusters) == 1
-%             
-%             disp('The two tracks were in the same cluster.')
-%             disp('Marginal probabilities of association:')
-%             disp(info.Clusters{1}.MarginalProbabilities)
-%         end
-%         disp('-----------------------------')
-%     end
 end
 
 
@@ -180,7 +174,7 @@ for time = 1:dt:314
     veh_vel = veh_pos - veh_prev;
     
     % Step the tracker through time with the detections.
-    scatter(veh_pos(1),veh_pos(2),'.');
+    scatter(veh_pos(1),veh_pos(2),'r.');
     if size(Ptcentroid_samedir{time},1) ~= 0
         [confirmed,tentative,alltracks,info] = tracker(detection,time);
     
@@ -202,6 +196,7 @@ for time = 1:dt:314
             end
         end
         confiemed = confirmed2;
+        lane_two(time) = size(confirmed,1);
         meas = cat(2,detection.Measurement);
         measCov = cat(3,detection.MeasurementNoise);
     %     % Update the plot if there are any tracks.
@@ -211,22 +206,48 @@ for time = 1:dt:314
         end
         pause(0.1);
     end
-        %     pause(0.5);
-    %detectionP.plotDetection(meas',measCov);
-%     drawnow;
-%     % Display the cost and marginal probability of distribution every eight
-%     % seconds.
-%     if time>0 && mod(time,8) == 0
-%         disp(['At time t = ' num2str(time) ' seconds,']);
-%         disp('The cost of assignment was: ')
-%         disp(info.CostMatrix);
-%         disp(['Number of clusters: ' num2str(numel(info.Clusters))]);
-%         if numel(info.Clusters) == 1
-%             
-%             disp('The two tracks were in the same cluster.')
-%             disp('Marginal probabilities of association:')
-%             disp(info.Clusters{1}.MarginalProbabilities)
-%         end
-%         disp('-----------------------------')
-%     end
+
 end
+
+%% Plotting for heatmap
+val = 12;
+x_l1 = zeros(N,1);
+y_l1 = zeros(N,1);
+x_l2 = zeros(N,1);
+y_l2 = zeros(N,1);
+
+% extract lane points from cell
+for i = 1:N
+    x_l1(i) = opposite_lane_points{i}(1);
+    y_l1(i) = opposite_lane_points{i}(2);
+    x_l2(i) = lidar_vehicle{i}(1,4);
+    y_l2(i) = lidar_vehicle{i}(2,4);
+end
+
+for i = val+1:val:N
+    % one moving in frame is yellow, zero is green more than 1 is red
+    figure(200)
+    l1_avg = sum(lane_one(i-val:i))/val;
+    l2_avg = sum(lane_two(i-val:i))/val;
+
+    if l1_avg < 1
+        scatter(x_l1(i-val:i) , y_l1(i-val:i),15,'g','filled')
+    elseif l1_avg > 1
+        scatter(x_l1(i-val:i) , y_l1(i-val:i),15,'r','filled')
+    else
+        scatter(x_l1(i-val:i) , y_l1(i-val:i),15,'y','filled')
+    end
+    if l2_avg < 1
+        scatter(x_l2(i-val:i) , y_l2(i-val:i),15,'g','filled')
+    elseif l2_avg > 1
+        scatter(x_l2(i-val:i) , y_l2(i-val:i),15,'r','filled')
+    else
+        scatter(x_l2(i-val:i) , y_l2(i-val:i),15,'y','filled')
+    end
+    hold on
+    axis equal
+end
+xlabel('x [m]')
+ylabel('y [m]')
+grid on
+axis equal
