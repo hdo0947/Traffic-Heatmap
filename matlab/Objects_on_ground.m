@@ -1,6 +1,6 @@
 clc; clear;close all;
-ptCloud_ground = pcread('pcd_data/0000000028ground.pcd');
-ptCloud_notground = pcread('pcd_data/0000000028notground.pcd');
+ptCloud_ground = pcread('pcd_data/0014/0000000000ground.pcd');
+ptCloud_notground = pcread('pcd_data/0014/0000000000notground.pcd');
 
 rng('default')
 xy_ground = double(ptCloud_ground.Location(:,1:3));
@@ -8,23 +8,29 @@ xy_notground = double(ptCloud_notground.Location(:,1:3));
 size(ptCloud_ground.Location);
 % plot(xy_ground(:,1), xy_ground(:,2), '.')
 
-% figure(1)
-% plot(xy_ground(:,1), xy_ground(:,2), '.')
-% k = boundary(xy_ground(:,1), xy_ground(:,2));
-% hold on;
-% plot(xy_ground(k,1),xy_ground(k,2))
-% axis equal
-% 
-% % boundary of the ground:
-% xv = xy_ground(k,1); yv = xy_ground(k,2);
-% % things on the ground:
-% xq = xy_notground(:,1); yq = xy_notground(:,2);
-% in = inpolygon(xq,yq,xv,yv);
-% figure(2)
-% plot(xy_ground(k,1),xy_ground(k,2))
-% hold on
-% plot(xq(in),yq(in),'.')
-% axis equal
+figure(1)
+plot(xy_ground(:,1), xy_ground(:,2), '.')
+k = boundary(xy_ground(:,1), xy_ground(:,2));
+hold on;
+plot(xy_ground(k,1),xy_ground(k,2))
+xlabel('x [m]')
+ylabel('y [m]')
+title('Perfect Boundary (Ground Points)')
+axis equal
+
+% boundary of the ground:
+xv = xy_ground(k,1); yv = xy_ground(k,2);
+% things on the ground:
+xq = xy_notground(:,1); yq = xy_notground(:,2);
+in = inpolygon(xq,yq,xv,yv);
+figure(2)
+plot(xy_ground(k,1),xy_ground(k,2))
+hold on
+plot(xq,yq,'.')
+xlabel('x [m]')
+ylabel('y [m]')
+title('Perfect Boundary (Non-Ground Points)')
+axis equal
 %%
 % delete outliers:
 % dist_to_lidar = sqrt(xy_ground(:,1).^2 + xy_ground(:,2).^2);
@@ -43,6 +49,9 @@ figure(3)
 plot(x, y, '.')
 hold on;
 plot(x(k), y(k))
+xlabel('x [m]')
+ylabel('y [m]')
+title('Convex Boundary (Ground Points)')
 axis equal
 
 % boundary of the ground:
@@ -53,13 +62,16 @@ in = inpolygon(xq,yq,xv,yv);
 figure(4)
 plot(xv,yv)
 hold on
-plot(xq(in),yq(in),'.')
+plot(xq,yq,'.')
+xlabel('x [m]')
+ylabel('y [m]')
+title('Convex Boundary (Non-Ground Points)')
 axis equal
 
 
 %% Matlab built in clustering method based on Euclidean distance:
 ptCloudWithoutGround = select(ptCloud_notground,in);
-minDistance = 1;
+minDistance = 1.2;
 [labels,numClusters] = pcsegdist(ptCloudWithoutGround,minDistance);
 
 idxValidPoints = find(labels);
@@ -67,10 +79,10 @@ idxValidPoints = find(labels);
 labelColorIndex = labels(idxValidPoints);
 segmentedPtCloud = select(ptCloudWithoutGround,idxValidPoints);
 
-% figure
-% colormap(hsv(numClusters))
-% pcshow(segmentedPtCloud.Location,labelColorIndex)
-% title('Point Cloud Clusters')
+figure(6)
+colormap(hsv(numClusters))
+pcshow(segmentedPtCloud.Location,labelColorIndex)
+title('Point Cloud Clusters')
 
 %% Put the points into its cluster:
 % mapCluster = containers.Map;

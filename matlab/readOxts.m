@@ -8,6 +8,5 @@ function oxts_ = readOxts(FolderName)
         thisdata = load(thisfilename);
         oxts_{i} = thisdata;
     end
-    save('./oxts.mat', 'oxts_');
 
 end
