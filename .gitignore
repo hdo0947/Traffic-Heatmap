@@ -4,3 +4,4 @@ data_set/0014/oxts/*.txt
 data_set/0014/velodyne/*.bin
 *.pcd
 *.mat
+data_set/
