@@ -5,7 +5,7 @@ This is the coding part of the traffic heatmap. This project is to create a traf
 
 ![traffic heatmap](traffic heatmap.png)
 
-# Membership
+# Members
 Yufeng Chen
 Nitish Sanghi
 Tingjun Li
