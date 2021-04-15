@@ -49,3 +49,5 @@ sudo apt install python3-pcl
 It can be runned by run.sh
 
 `/bin/bash run.sh`
+
+https://youtu.be/IajEf3-k74o
