@@ -38,6 +38,12 @@ Image Processing Toolbox
 
 Sensor Fusion and Tracking Toolbox
 
+```bash
+sudo add-apt-repository ppa:sweptlaser/python3-pcl
+sudo apt update
+sudo apt install python3-pcl
+```
+
 ## Execution
 
 It can be runned by run.sh
