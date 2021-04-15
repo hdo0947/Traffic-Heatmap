@@ -1,7 +1,7 @@
 # Traffic Heatmap Generation on World Map
 
 # Introduction
-This is the coding part of the traffic heatmap. This project is to create a traffic heatmap based on the LiDAR and GPS data.
+This is the coding part of the traffic heatmap. This project is to create a traffic heatmap based on a world map using the LiDAR and GPS data.
 
 ![traffic heatmap](traffic heatmap.png)
 
@@ -16,7 +16,7 @@ Ruochen Hou
 ![workflow](workflow.png)
 
 
-# Instruction
+# Instructions
 
 ## Environment
 
@@ -28,7 +28,7 @@ MATLAB R2021a
 
 bash: /bin/bash
 
-## Prerequisite
+## Prerequisites
 
 python-pcl
 
