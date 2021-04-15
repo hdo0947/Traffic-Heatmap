@@ -1,4 +1,4 @@
-# Traffic Heatmap Generation on Wrold Map
+# Traffic Heatmap Generation on World Map
 
 # Introduction
 This is the coding part of the traffic heatmap. This project is to create a traffic heatmap based on the radar dataset.
