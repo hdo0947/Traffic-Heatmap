@@ -3,6 +3,7 @@
 # Introduction
 This is the coding part of the traffic heatmap. This project is to create a traffic heatmap based on a world map using the LiDAR and GPS data.
 
+The video link is: [Video Link](https://www.youtube.com/watch?v=GV9WJa1PSSE)
 ![traffic heatmap](traffic heatmap.png)
 
 # Members
