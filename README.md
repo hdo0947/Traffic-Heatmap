@@ -1,7 +1,7 @@
 # Traffic Heatmap Generation on World Map
 
 # Introduction
-This is the coding part of the traffic heatmap. This project is to create a traffic heatmap based on the radar dataset.
+This is the coding part of the traffic heatmap. This project is to create a traffic heatmap based on the LiDAR and GPS data.
 
 ![traffic heatmap](traffic heatmap.png)
 
